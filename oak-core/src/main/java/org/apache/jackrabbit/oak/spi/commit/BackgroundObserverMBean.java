@@ -31,4 +31,6 @@ public interface BackgroundObserverMBean {
     int getExternalEventCount();
 
     String getClassName();
+    
+    void printQueueContent();
 }

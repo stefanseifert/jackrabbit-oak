@@ -27,6 +27,7 @@ import static com.google.common.collect.Queues.newArrayBlockingQueue;
 
 import java.io.Closeable;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -35,6 +36,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+
 import org.apache.jackrabbit.oak.commons.concurrent.NotifyingFutureTask;
 import org.apache.jackrabbit.oak.spi.state.NodeState;
 import org.slf4j.Logger;
@@ -248,6 +251,20 @@ public class BackgroundObserver implements Observer, Closeable {
                     }
                 }));
             }
+            
+            
+            @Override
+            public void printQueueContent() {
+                System.out.println("--- " + new java.util.Date().toString() + " printQueueContent START ---");
+                java.util.List<ContentChange> queueCopy = ImmutableList.copyOf(queue);
+                int index = 0;
+                for (ContentChange change : queueCopy) {
+                    System.out.println(index + " " + change.root + " [" + change.info + "]");
+                    index++;
+                }
+                System.out.println("--- " + new java.util.Date().toString() + " printQueueContent END ---");
+            }
+            
         };
     }
 

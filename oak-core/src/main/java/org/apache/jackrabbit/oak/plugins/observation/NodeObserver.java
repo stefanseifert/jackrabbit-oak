@@ -162,8 +162,8 @@ public abstract class NodeObserver implements Observer {
                     generator.generate();
                 }
                 PERF_LOGGER.end(start, 100,
-                        "Generated events (before: {}, after: {})",
-                        previousRoot, root);
+                        "Generated events (before: {}, after: {}, commitInfo: {})",
+                        previousRoot, root, info);
             } catch (Exception e) {
                 LOG.warn("Error while dispatching observation events", e);
             }
